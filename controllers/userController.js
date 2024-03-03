@@ -27,7 +27,7 @@ const Login = async (request, response) => {
             return response.status(400).json({error:"Missing body params"});
         }
 
-        const {email,password} = request.body;
+        const {email,password: providedPassword} = request.body;
 
         if(!email || !password){
             return response.status(400).json({error:"Fields are missing"});
@@ -36,8 +36,17 @@ const Login = async (request, response) => {
         const CheckUserExist = await User.findOne({email})
 
         if(CheckUserExist){
+            
+        const { password: storedPassword } = CheckUserExist;
+
+        if (storedPassword === providedPassword) {
+            // Passwords match, proceed with login
             return response.status(400).json({message:'Login Successfully',data:CheckUserExist,Loginstatus:'1'});
-        }
+        } else {
+            // Passwords don't match
+            return response.status(400).json({error:"Password not match"});
+        }        
+    }
         else{
              return response.status(400).json({error:"User not found"});
         }
