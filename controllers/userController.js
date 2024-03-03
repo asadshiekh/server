@@ -1,7 +1,7 @@
 import { request, response } from 'express';
 import User from '../model/user_model.js';
 
-const UserController = async (request, response) => {
+const CreateUser = async (request, response) => {
      try {
         const newUser = new User({
             full_name: request.body.name,
