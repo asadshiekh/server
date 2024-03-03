@@ -47,7 +47,13 @@ const Login = async (request, response) => {
 
 };
 
+const Login1 = async (request, response) => {
 
-export {UserController,Login};
+    return response.status(200).json('Success');
+
+};
+
+
+export {UserController,Login,Login1};
 
 export default UserController;
