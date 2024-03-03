@@ -1,6 +1,6 @@
 import express from 'express';
 import { CreateBlog, FetchBlog ,FetchThreeBlogs,FetchThreeBlogsWithPagniation,SearchBlogs} from '../controllers/blogController.js';
-import CreateUser from '../controllers/userController.js';
+import {CreateUser,Login} from '../controllers/userController.js';
 
 const router = express.Router();
 
@@ -15,6 +15,8 @@ router.get('/fetch-three-blog-pagenation', FetchThreeBlogsWithPagniation);
 // Route to search blogs
 router.get('/search', SearchBlogs);
 
-router.post('/create-user', CreateUser);
 
+// User Routes
+router.post('/create-user', CreateUser);
+router.post('/login', Login);
 export default router;

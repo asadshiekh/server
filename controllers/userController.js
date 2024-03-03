@@ -21,6 +21,32 @@ const UserController = async (request, response) => {
     }
 };
 
+const Login = async (request, response) => {
+    try {       
+        if(!request.body){
+            return response.status(400).json({error:"Missing body params"});
+        }
 
-export default UserController;
+        const {email,password} = request.body;
+
+        if(!email || !password){
+            return response.status(400).json({error:"Fields are missing"});
+        }
+
+        const CheckUserExist = await User.findOne({email})
+
+        if(CheckUserExist){
+            return response.status(400).json({message:'Login Successfully',data:CheckUserExist,Loginstatus:'1'});
+        }
+        else{
+             return response.status(400).json({error:"User not found"});
+        }
+   } catch (error) {
+       return response.status(500).json(error);
+   }
+
+};
+
+
+export default {UserController,Login};
 
