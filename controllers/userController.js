@@ -54,6 +54,6 @@ const Login1 = async (request, response) => {
 };
 
 
-export {UserController,Login,Login1};
+export {CreateUser,Login,Login1};
 
-export default UserController;
+export default CreateUser;
