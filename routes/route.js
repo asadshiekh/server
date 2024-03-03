@@ -17,6 +17,6 @@ router.get('/search', SearchBlogs);
 
 
 // User Routes
-router.post('/create-user', CreateUser);
+router.post('/create-user', UserController);
 router.post('/login', Login);
 export default router;

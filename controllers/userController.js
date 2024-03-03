@@ -48,5 +48,6 @@ const Login = async (request, response) => {
 };
 
 
-export default {UserController,Login};
+export {UserController,Login};
 
+export default UserController;
