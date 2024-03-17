@@ -37,7 +37,7 @@ const Login = async (request, response) => {
 
         if(CheckUserExist){
             
-        const { password} = CheckUserExist;
+        const {password} = CheckUserExist;
 
         if (password === UserPassword) {
             // Passwords match, proceed with login

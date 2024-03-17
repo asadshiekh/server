@@ -32,6 +32,30 @@ const CreateBlog = async (request, response) => {
 };
 
 
+const CreateBlog1 = async (request, response) => {
+    try {
+
+       // If no duplicate title found, proceed to create the blog
+       const newBlog = new Blog({
+           title: request.body.title,
+           description: request.body.description,
+           author: request.body.fullname,
+       });
+
+        const savedBlog =  await newBlog.save();
+
+        return response.status(200).json({
+            data: savedBlog,
+            msg: 'Blog successfully added'
+        });
+   } catch (error) {
+        return response.status(500).json(error);
+   }
+};
+
+
+
+
 const FetchBlog = async (request, response) => {
     try {
         // Fetch all blogs
@@ -109,6 +133,6 @@ const SearchBlogs = async (request, response) => {
 
 
 
-export { CreateBlog, FetchBlog,FetchThreeBlogs,FetchThreeBlogsWithPagniation,SearchBlogs };
+export { CreateBlog, FetchBlog,FetchThreeBlogs,FetchThreeBlogsWithPagniation,SearchBlogs,CreateBlog1};
 
 export default CreateBlog;
