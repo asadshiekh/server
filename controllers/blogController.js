@@ -80,8 +80,46 @@ const FetchBlogUserOnly = async (request, response) => {
 
 };
 
+const DeleteBlogPost = async (request, response) => {
 
+    try {
+        // Extract the postId from the request parameters
+        const postId = request.params.postIdToDelete;
+        // return response.json({postId});
+        // Find the blog post by its ID and delete it
+        const restult = await Blog.findByIdAndDelete(postId);
+        // return response.json({restult});
+        // Respond with a success message
+        return response.status(200).json({ message: 'Blog post deleted successfully' });
+      } catch (error) {
+        // If an error occurs, respond with an error message
+        console.error('Error deleting blog post:', error);
+        return response.status(500).json({ error: 'An error occurred while deleting the blog post' });
+      }
 
+};
+
+const UpdateBlogPost = async (request, response) => {
+
+    try {
+        // Extract the postId from the request parameters
+        const postId = request.params.postId;
+        
+        // Extract the updated post title and description from the request body
+        const { editPostTitle, editPostDescription } = request.body;
+    
+        // Find the blog post by its ID and update it
+        await Blog.findByIdAndUpdate(postId, { title: editPostTitle, description: editPostDescription });
+    
+        // Respond with a success message
+       return  response.status(200).json({ message: 'Blog post updated successfully' });
+      } catch (error) {
+        // If an error occurs, respond with an error message
+        console.error('Error updating blog post:', error);
+        return response.status(500).json({ error: 'An error occurred while updating the blog post' });
+      }
+
+};
 
 
 
@@ -151,6 +189,6 @@ const SearchBlogs = async (request, response) => {
 
 
 
-export { CreateBlog, FetchBlog,FetchThreeBlogs,FetchThreeBlogsWithPagniation,SearchBlogs,CreateBlog1,FetchBlogUserOnly};
+export { CreateBlog, FetchBlog,FetchThreeBlogs,FetchThreeBlogsWithPagniation,SearchBlogs,CreateBlog1,FetchBlogUserOnly,DeleteBlogPost,UpdateBlogPost};
 
 export default CreateBlog;
