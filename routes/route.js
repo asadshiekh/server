@@ -1,5 +1,5 @@
 import express from 'express';
-import { CreateBlog, FetchBlog ,FetchThreeBlogs,FetchThreeBlogsWithPagniation,SearchBlogs,CreateBlog1} from '../controllers/blogController.js';
+import { CreateBlog, FetchBlog ,FetchThreeBlogs,FetchThreeBlogsWithPagniation,SearchBlogs,CreateBlog1,FetchBlogUserOnly} from '../controllers/blogController.js';
 import {CreateUser,Login,Login1} from '../controllers/userController.js';
 
 const router = express.Router();
@@ -13,8 +13,13 @@ router.post('/create-blog1', CreateBlog1);
 router.get('/get-blog', FetchBlog);
 router.get('/fetch-three-blog', FetchThreeBlogs);
 router.get('/fetch-three-blog-pagenation', FetchThreeBlogsWithPagniation);
+
 // Route to search blogs
 router.get('/search', SearchBlogs);
+router.get('/fetch-user-only/:userId',FetchBlogUserOnly);
+
+
+  
 
 
 // User Routes

@@ -39,7 +39,7 @@ const CreateBlog1 = async (request, response) => {
        const newBlog = new Blog({
            title: request.body.title,
            description: request.body.description,
-           author: request.body.fullname,
+           user_id: request.body.user_id,
        });
 
         const savedBlog =  await newBlog.save();
@@ -59,13 +59,31 @@ const CreateBlog1 = async (request, response) => {
 const FetchBlog = async (request, response) => {
     try {
         // Fetch all blogs
-        const blogs = await Blog.find();
-
+        const blogs = await Blog.find().populate('user_id', 'full_name');
+    
         return response.status(200).json(blogs);
     } catch (error) {
         return response.status(500).json(error);
     }
 };
+
+const FetchBlogUserOnly = async (request, response) => {
+    try {
+        const userId = request.params.userId;
+        // Fetch blogs that match the user ID
+         const blogs = await Blog.find({ user_id: userId }).populate('user_id', 'full_name');   
+       
+        return response.status(200).json(blogs);
+    } catch (error) {
+        return response.status(500).json(error);
+    }
+
+};
+
+
+
+
+
 
 const FetchThreeBlogs = async (request, response) => {
     try {
@@ -133,6 +151,6 @@ const SearchBlogs = async (request, response) => {
 
 
 
-export { CreateBlog, FetchBlog,FetchThreeBlogs,FetchThreeBlogsWithPagniation,SearchBlogs,CreateBlog1};
+export { CreateBlog, FetchBlog,FetchThreeBlogs,FetchThreeBlogsWithPagniation,SearchBlogs,CreateBlog1,FetchBlogUserOnly};
 
 export default CreateBlog;
